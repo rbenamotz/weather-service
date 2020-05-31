@@ -56,3 +56,9 @@ variable "vpc_name" {
   type    = string
   default = ""
 }
+
+variable "memory_size" {
+  type = number
+  
+}
+

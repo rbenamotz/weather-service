@@ -1,11 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Module, HttpModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthController } from 'health.controller';
+import { WeatherController } from 'weather.controller';
+import { SecretService } from 'awsSecret.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController, HealthController],
-  providers: [AppService],
+  imports: [HttpModule],
+  controllers: [AppController, HealthController ,WeatherController],
+  providers: [AppService, SecretService],
 })
 export class AppModule {}
