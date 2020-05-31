@@ -13,6 +13,10 @@ export class SecretService {
     }
 
     public async getSecretValue(key: string) {
+        const temp = this.store.get(key);
+        if (temp) {
+            return temp;
+        }
         const response = await this.secretsManager
             .getSecretValue({SecretId: key})
             .promise();
