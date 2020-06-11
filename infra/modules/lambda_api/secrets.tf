@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "weather" {
-  name = "openweathermap-api-key"
+  name = "openweathermap-api-${var.env}-key"
 }
 
 resource "aws_secretsmanager_secret_version" "openweathermapApi" {

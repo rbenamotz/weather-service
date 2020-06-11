@@ -1,1 +1,23 @@
+
+# Local
+
 http://localhost:3000/weather/30022
+
+
+###
+
+
+
+
+# Dev on cloud
+
+https://lfs380uzyb.execute-api.us-east-1.amazonaws.com/public/weather/30022
+###
+
+#Pre prod
+https://sm10z4j1gd.execute-api.us-east-1.amazonaws.com/public/weather/30022
+
+###
+
+# Env1 on cloud 
+https://hl4tsj67n5.execute-api.us-east-1.amazonaws.com/public/weather/30022

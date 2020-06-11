@@ -13,7 +13,7 @@ export class WeatherController {
     @Get('/weather/:zipcode')
     @Header('content-type', 'application/json')
     async getWeatherForZip(@Param() params) {
-        const apiKey = await this.secretService.getSecretValue('openweathermap-api-key');
+        const apiKey = await this.secretService.getSecretValue('openweathermap-api-dev-key');
         const urlParams = { zip: params.zipcode + ',us', appid: apiKey }
         const url = 'http://api.openweathermap.org/data/2.5/weather'; 
         const response = await this.http.get(url, {params: urlParams}).toPromise();

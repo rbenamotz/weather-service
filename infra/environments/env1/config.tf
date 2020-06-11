@@ -7,7 +7,7 @@ terraform {
 
   backend "s3" {
     bucket = "benamotz-dev-terraform-state"
-    key    = "weather-service/pp/benamotz-pp-terraform.state"
+    key    = "weather-service/env1/benamotz-env1-terraform.state"
     region = "us-east-1"
   }
 }
