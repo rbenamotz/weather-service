@@ -11,7 +11,7 @@ module "weather_lambda" {
   secrets = [
     "arn:aws:secretsmanager:us-east-1:609431849922:secret:benamotz/*"
   ]
-  memory_size = 512
+  memory_size = 1024
 
 }
 

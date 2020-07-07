@@ -16,10 +16,11 @@ call rimraf ./node_modules/aws-sdk
 cd ..\..\
 
 REM Arvhie
+echo "Zipping dist"
 cd dist\ 
 call zip -qr build.zip .
 cd ..\
-
+echo "Zipping layers"
 cd dist-layers
 call zip -qr layers.zip .
 cd ..\

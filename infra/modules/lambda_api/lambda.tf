@@ -23,7 +23,7 @@ resource "aws_lambda_alias" "public" {
 resource "aws_lambda_function" "api" {
   function_name    = "${local.function_name}-api"
   handler          = "index.handler"
-  runtime          = "nodejs10.x"
+  runtime          = "nodejs12.x"
   role             = aws_iam_role.lambda_exec.arn
   filename         = var.lambda_handler_filepath
   source_code_hash = filebase64sha256(var.lambda_handler_filepath)
