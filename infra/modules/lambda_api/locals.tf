@@ -1,6 +1,8 @@
 locals {
   default_environment_variables = {
-    NODE_ENV: var.env
+    NODE_ENV: var.env,
+    WEATHER_SRV_URL: "http://api.openweathermap.org/data/2.5/weather",
+    QUEUE_URL: aws_sqs_queue.weather_usage_queue.id
   }
 
   environment_variables = merge(local.default_environment_variables, var.environment_variables)

@@ -10,16 +10,18 @@ import AWS = require('aws-sdk');
 export class WeatherController {
     constructor(private readonly http: HttpService, private readonly secretService: SecretService) { }
 
-    async sendToQ() {
+    async sendToQ(body) {
         var sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
         var params = {
-            MessageBody: 'STRING_VALUE',
-            QueueUrl: 'https://sqs.us-east-1.amazonaws.com/192158051712/com-benamotz-dev-weather-queue',
+            MessageBody: JSON.stringify(body),
+            QueueUrl: process.env.QUEUE_URL,
         };
         return sqs.sendMessage(params, function (err, data) {
-            if (err) console.log(err, err.stack); // an error occurred
-            else console.log(data);           // successful response
-        }).promise();
+            if (err) {
+                console.log(err, err.stack);
+                throw err;
+            }
+        });
     }
 
 
@@ -29,11 +31,14 @@ export class WeatherController {
     async getWeatherForZip(@Param() params) {
         const apiKey = await this.secretService.getSecretValue('openweathermap-api-dev-key');
         const urlParams = { zip: params.zipcode + ',us', appid: apiKey }
-        const url = 'http://api.openweathermap.org/data/2.5/weather';
+        const url = process.env.WEATHER_SRV_URL;
         const response = await this.http.get(url, { params: urlParams }).toPromise();
-        return this.sendToQ().then(() => {
-            return response.data;
-        });
+        var msg = {
+            zip: params.zipcode,
+            temp: response.data.main.temp
+        }
+        await this.sendToQ(msg);
+        return response.data;
     }
 
 
