@@ -1,5 +1,6 @@
 resource "aws_api_gateway_rest_api" "weather" {
-  name        = "benamotz-${var.env}-weather-api-gateway"
+  name = "${local.function_name}-api-gateway"
+  # name        = "benamotz-${var.env}-weather-api-gateway"
   description = "Endpoint for weather API"
 }
 

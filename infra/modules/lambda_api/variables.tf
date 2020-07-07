@@ -1,6 +1,7 @@
 variable "name" {
   type        = string
   description = "Solution name, e.g. 'app' or 'jenkins'"
+  default = "weather"
 }
 
 variable "env" {
@@ -10,10 +11,12 @@ variable "env" {
 
 variable "lambda_handler_filepath" {
   type = string
+  default = "../../../api/dist/build.zip"
 }
 
 variable "lambda_dependencies_filepath" {
   type = string
+  default = "../../../api/dist-layers/layers.zip"
 }
 
 variable "environment_variables" {
@@ -22,43 +25,26 @@ variable "environment_variables" {
   default     = {}
 }
 
-variable "secrets" {
-  type    = list
-  default = []
-}
 
 variable "url_path" {
   type = string
+  default = "public"
 }
 
-variable "sub_domain" {}
-
-
-variable "root_domain_name" {}
-
-
-variable "create_log_groups" {
-  type    = bool
-  default = false
+variable "sub_domain" {
+  type = string
+  default = "weather"
 }
 
-variable alarm_on_no_requests {
-  description = "Whether to alert when no requests are being recieved from homenet for an env"
-  default     = true
+
+variable "root_domain_name" {
+  type = string
+  default = "weather.benamotz.com"
 }
 
-variable "vpc_cidr" {
-  type    = string
-  default = ""
-}
-
-variable "vpc_name" {
-  type    = string
-  default = ""
-}
 
 variable "memory_size" {
-  type = number
-  
+  type = number 
+  default = 512
 }
 

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Header, NotFoundException, Param, Post, UseGuard
 import { response } from 'express';
 import { Observable } from 'rxjs';
 import { AxiosResponse } from "axios";
-import { SecretService } from 'awsSecret.service';
+import { SecretService } from 'service/awsSecret.service';
 import AWS = require('aws-sdk');
 
 @Controller()
@@ -29,7 +29,7 @@ export class WeatherController {
     @Get('/weather/:zipcode')
     @Header('content-type', 'application/json')
     async getWeatherForZip(@Param() params) {
-        const apiKey = await this.secretService.getSecretValue('openweathermap-api-dev-key');
+        const apiKey = await this.secretService.getSecretValue(process.env.OPENWEATHERMAP_KEY);
         const urlParams = { zip: params.zipcode + ',us', appid: apiKey }
         const url = process.env.WEATHER_SRV_URL;
         const response = await this.http.get(url, { params: urlParams }).toPromise();

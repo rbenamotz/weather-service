@@ -7,15 +7,13 @@ export class SecretService {
     private store = new Map<string, any>();
 
     constructor() {
-        this.secretsManager = new SecretsManager({
-            region: 'us-east-1',
-        });
+        this.secretsManager = new SecretsManager();
     }
 
     public async getSecretValue(key: string) {
-        const temp = this.store.get(key);
-        if (temp) {
-            return temp;
+        const cachedValue = this.store.get(key);
+        if (cachedValue) {
+            return cachedValue;
         }
         const response = await this.secretsManager
             .getSecretValue({SecretId: key})

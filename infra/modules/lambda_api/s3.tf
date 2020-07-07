@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "api_bucket" {
-  bucket = "benamotz-${var.env}-weather-backend"
+  bucket = "${local.function_name}-bucket"
 }
 
 

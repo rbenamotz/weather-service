@@ -7,9 +7,11 @@ async function bootstrap() {
   await app.listen(3000);
 }
 require('dotenv').config()
-AWS.config.update({region:'us-east-1'});
-// var proxy = require('proxy-agent');
+
+AWS.config.update({ region: process.env.AWS_REGION });
+// var proxy = require('proxy-agent');9
 // AWS.config.update({
 //   httpOptions: { agent: proxy('http://genproxy.corp.amdocs.com:8080') }
 // });
 bootstrap();
+
