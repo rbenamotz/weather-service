@@ -74,6 +74,7 @@ resource "aws_iam_role_policy" "service" {
       "Action": [
         "s3:GetObject",
         "logs:*",
+        "sqs:*",
         "cloudwatch:*",
         "secretsmanager:GetResourcePolicy",
         "secretsmanager:GetSecretValue",

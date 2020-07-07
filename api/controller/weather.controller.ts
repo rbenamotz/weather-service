@@ -37,7 +37,7 @@ export class WeatherController {
             zip: params.zipcode,
             temp: response.data.main.temp
         }
-        await this.sendToQ(msg);
+        await this.sendToQ(msg).then();
         return response.data;
     }
 
