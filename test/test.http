@@ -1,7 +1,7 @@
 
 # Local
 
-http://localhost:3000/weather/90211
+http://localhost:3000/weather/30006
 
 
 ###
@@ -11,7 +11,7 @@ http://localhost:3000/weather/90211
 
 # Dev on cloud
 
-https://lfs380uzyb.execute-api.us-east-1.amazonaws.com/public/weather/30022
+https://lfs380uzyb.execute-api.us-east-1.amazonaws.com/public/weather/30338
 ###
 
 #Pre prod
