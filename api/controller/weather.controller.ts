@@ -14,11 +14,8 @@ export class WeatherController {
             MessageBody: JSON.stringify(body),
             QueueUrl: process.env.QUEUE_URL,
         };
-        console.log("sendToQ " + JSON.stringify(body));
-        return sqs.sendMessage(params, err => {
-            if (err) throw err;
-            else console.log("Sent to log")
-        }).promise();
+        // console.log("sendToQ " + JSON.stringify(body));
+        return sqs.sendMessage(params).promise();
     }
 
 
@@ -29,27 +26,12 @@ export class WeatherController {
         const apiKey = await this.secretService.getSecretValue(process.env.OPENWEATHERMAP_KEY);
         const urlParams = { zip: params.zipcode + ',us', appid: apiKey }
         const url = process.env.WEATHER_SRV_URL;
-        let p = this.http.get(url, { params: urlParams }).toPromise();
-        return p
+        return this.http.get(url, { params: urlParams }).toPromise()
             .then(result => { return (result.data) })
-        // .catch(failureCallback);
-        // p = p.then(response => {
-        //     return response.data;
-
-        // });
-        // p = p.then(data => {
-        //     var msg = {
-        //         zip: params.zipcode,
-        //         temp: data['main']['temp']
-        //     }
-        //     return msg;
-        // })
-        // return p;
-        // var promise = this.sendToQ(msg);
-        // promise = promise.then(() => { return response.data });
-        // return promise;
-        // return response.data;
-
+            .then(async data => {
+                await this.sendToQ({ zip: params.zipcode, temp: data.main.temp });
+                return data;
+            });
     }
 
 

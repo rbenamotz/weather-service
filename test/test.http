@@ -1,7 +1,7 @@
 
 # Local
 
-http://localhost:3000/weather/30006
+http://localhost:3000/weather/30338
 
 
 ###
@@ -15,7 +15,7 @@ https://lfs380uzyb.execute-api.us-east-1.amazonaws.com/public/weather/30338
 ###
 
 #Pre prod
-https://sm10z4j1gd.execute-api.us-east-1.amazonaws.com/public/weather/30022
+https://sm10z4j1gd.execute-api.us-east-1.amazonaws.com/public/weather/20222
 
 ###
 
