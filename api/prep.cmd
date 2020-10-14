@@ -1,10 +1,10 @@
-REM Clean
+echo "Cleanup"
 call rimraf ./dist
 call rimraf ./dist-layers
-REM Build
+echo "Building"
 call nest build
 
-REM bundle:prepare 
+@REM bundle:prepare 
 if not exist dist-layers\nodejs mkdir dist-layers\nodejs
 if not exist dist mkdir dist
 xcopy config dist\ /s /e
@@ -15,7 +15,7 @@ call npm install --only=prod
 call rimraf ./node_modules/aws-sdk
 cd ..\..\
 
-REM Arvhie
+@REM Archive
 echo "Zipping dist"
 cd dist\ 
 call zip -qr build.zip .

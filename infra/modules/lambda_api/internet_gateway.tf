@@ -1,7 +1,6 @@
 resource "aws_api_gateway_rest_api" "weather" {
   name = "${local.function_name}-api-gateway"
-  # name        = "benamotz-${var.env}-weather-api-gateway"
-  description = "Endpoint for weather API"
+  description = "Endpoint for weather API (${var.env})"
 }
 
 resource "aws_api_gateway_method" "proxy_root" {
@@ -30,9 +29,3 @@ resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = aws_api_gateway_rest_api.weather.id
   stage_name  = var.url_path
 }
-
-# resource "aws_api_gateway_base_path_mapping" "gateway_path_mapping" {
-#   api_id      = aws_api_gateway_rest_api.weather.id
-#   stage_name  = aws_api_gateway_deployment.weather.stage_name
-#   domain_name = aws_api_gateway_domain_name.api.domain_name
-# }
