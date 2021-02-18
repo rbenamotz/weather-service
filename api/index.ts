@@ -7,8 +7,11 @@ import * as http from 'http';
 import { Server } from 'http';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 let cachedServer: Server;
+
+
 
 async function bootstrapServer(): Promise<Server> {
     try {
@@ -16,6 +19,7 @@ async function bootstrapServer(): Promise<Server> {
         const adapter = new ExpressAdapter(expressApp);
         const app = await NestFactory.create(AppModule, adapter);
         app.use(express.json({ limit: '5mb' }));
+        app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
         app.enableCors();
         await app.init();
         return createServer(expressApp);

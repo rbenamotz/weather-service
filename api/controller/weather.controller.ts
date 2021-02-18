@@ -1,12 +1,18 @@
-import { Controller, Get, Header, Param, HttpService, Injectable } from '@nestjs/common';
+import { Controller, Get, Header, Param, HttpService, Injectable, Inject } from '@nestjs/common';
 import { SecretService } from 'service/awsSecret.service';
 import AWS = require('aws-sdk');
-import { response } from 'express';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
+
 
 @Controller()
 @Injectable()
 export class WeatherController {
-    constructor(private readonly http: HttpService, private readonly secretService: SecretService) { }
+    constructor(
+        private readonly http: HttpService,
+        private readonly secretService: SecretService,
+        @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger
+        ) { }
 
     async sendToQ(body: { zip: any; temp: any; }) {
         var sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
@@ -30,6 +36,7 @@ export class WeatherController {
             .then(result => { return (result.data) })
             .then(async data => {
                 await this.sendToQ({ zip: params.zipcode, temp: data.main.temp });
+                this.logger.debug({ zip: params.zipcode, temp: data.main.temp })
                 return data;
             });
     }

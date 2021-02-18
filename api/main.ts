@@ -13,5 +13,6 @@ AWS.config.update({ region: process.env.AWS_REGION });
 // AWS.config.update({
 //   httpOptions: { agent: proxy('http://genproxy.corp.amdocs.com:8080') }
 // });
+
 bootstrap();
 

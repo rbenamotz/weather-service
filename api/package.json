@@ -37,10 +37,13 @@
     "aws-sdk": "latest",
     "aws-serverless-express": "^3.3.6",
     "dotenv": "^8.2.0",
+    "nest-winston": "^1.4.0",
     "proxy-agent": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "winston": "^3.3.3",
+    "winston-cloudwatch": "^2.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
