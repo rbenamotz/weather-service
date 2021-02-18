@@ -1,1 +1,1 @@
-My hellow world of simple Lambda service
+My hello world of simple Lambda service
